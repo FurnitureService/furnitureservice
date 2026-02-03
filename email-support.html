@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact Support</title>
+  <title>Contact Aybboal Support</title>
   <meta name="robots" content="noindex,nofollow" />
   <style>
     :root{
@@ -18,158 +18,151 @@
     body{
       margin:0;
       background:var(--bg);
-      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
       color:var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
     .wrap{
-      max-width:520px;
-      margin:0 auto;
-      padding:24px 16px 40px;
+      width:100%;
+      max-width:400px;
+      padding:20px;
     }
     .card{
       background:var(--card);
       border:1px solid var(--border);
-      border-radius:18px;
-      padding:22px 18px;
-      box-shadow: 0 8px 24px rgba(17,24,39,.06);
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:12px;
+      border-radius:24px;
+      padding:30px 24px;
+      box-shadow: 0 10px 30px rgba(17,24,39,.08);
+      text-align: center;
     }
     .logo{
-      width:42px;height:42px;border-radius:12px;
+      width:50px;height:50px;border-radius:14px;
       background:#111827;
       display:flex;align-items:center;justify-content:center;
-      color:#fff;font-weight:700;
+      color:#fff;font-weight:800;font-size:24px;
+      margin: 0 auto 16px;
     }
-    h1{
-      font-size:20px;
-      margin:10px 0 8px;
-    }
-    p{
-      margin:0 0 14px;
-      color:var(--sub);
-      font-size:14px;
-      line-height:1.55;
-    }
+    h1{ font-size:22px; margin:0 0 12px; }
+    p{ margin:0 0 20px; color:var(--sub); font-size:15px; line-height:1.6; }
+    
     .btn{
       display:block;
-      width:100%;
-      padding:14px 16px;
-      border-radius:14px;
+      padding:16px;
+      border-radius:16px;
       text-align:center;
       text-decoration:none;
       font-weight:700;
       font-size:16px;
-      margin-top:10px;
+      margin-top:12px;
+      transition: all 0.2s;
     }
     .primary{ background:var(--btn); color:#fff; }
     .secondary{ background:#fff; color:var(--btn2); border:1px solid var(--border); }
-    .small{
-      margin-top:14px;
-      font-size:12px;
-      color:var(--sub);
-    }
+    
     .kv{
-      margin-top:14px;
+      margin-top:20px;
+      padding-top:20px;
       border-top:1px dashed var(--border);
-      padding-top:14px;
-      font-size:13px;
+      font-size:14px;
       color:var(--sub);
     }
     code{
       background:#f3f4f6;
-      padding:2px 6px;
-      border-radius:8px;
+      padding:4px 8px;
+      border-radius:6px;
       color:#111827;
+      font-family: monospace;
+      display: block;
+      margin-top: 8px;
+    }
+    .loading-dots:after {
+      content: ' .';
+      animation: dots 1.5s steps(5, end) infinite;
+    }
+    @keyframes dots {
+      0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+      40% { color: var(--sub); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+      60% { text-shadow: .25em 0 0 var(--sub), .5em 0 0 rgba(0,0,0,0); }
+      80%, 100% { text-shadow: .25em 0 0 var(--sub), .5em 0 0 var(--sub); }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
-      <div class="brand">
-        <div class="logo">A</div>
-        <div>
-          <div style="font-weight:800;">Aybboal Support</div>
-          <div style="font-size:12px;color:#6b7280;">Email us for help</div>
-        </div>
-      </div>
+      <div class="logo">A</div>
+      <div style="font-weight:800; margin-bottom:4px;">Aybboal Support</div>
+      <div style="font-size:13px;color:#6b7280;margin-bottom:20px;">Official Customer Service</div>
 
-      <h1>Contact Customer Service</h1>
+      <h1 id="statusText" class="loading-dots">Connecting to Mail</h1>
       <p>
-        Please tap the button below to open your email app and send us a message.
-        We usually reply within 24 hours.
+        We are opening your email app. If it doesn't pop up, please use the buttons below.
       </p>
 
-      <!-- 邮件按钮（核心） -->
       <a class="btn primary" id="emailBtn" href="#">
-        Tap to Email Support
+        Tap to Write Email
       </a>
 
-      <!-- 备用按钮：复制邮箱 -->
       <a class="btn secondary" id="copyBtn" href="javascript:void(0)">
         Copy Email Address
       </a>
 
       <div class="kv">
-        Email: <code id="emailText">furnitureservice03@outlook.com</code>
-      </div>
-
-      <div class="small">
-        If the email app does not open, please copy the email address above and send us an email manually.
+        Contact Email:
+        <code id="emailText">furnitureservice01@outlook.com</code>
       </div>
     </div>
   </div>
 
   <script>
-    // ====== 这里按需修改 ======
-    const toEmail = "furnitureservice03@outlook.com";
-    const subject = "After-Sales Service";
-    const body =
-`Hello,
+    const config = {
+      to: "furnitureservice01@outlook.com",
+      subject: "After-Sales Support Request",
+      body: "Hello Aybboal Team,\n\nI need assistance with my order.\n\nOrder ID:\nIssue Description:\n\n(Please attach photos if applicable)\n\nThank you!"
+    };
 
-I need help with my order.
+    // 构建 mailto 链接
+    const mailtoLink = `mailto:${config.to}?subject=${encodeURIComponent(config.subject)}&body=${encodeURIComponent(config.body)}`;
 
-Order ID:
-Issue:
-Photos:
+    // 初始化界面
+    const emailBtn = document.getElementById("emailBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const emailText = document.getElementById("emailText");
+    const statusText = document.getElementById("statusText");
 
-Thank you.`;
+    emailBtn.href = mailtoLink;
+    emailText.textContent = config.to;
 
-    // URL 编码（非常重要）
-    function encodeMailto(text){
-      return encodeURIComponent(text).replace(/%20/g, "%20");
-    }
+    // 核心功能：自动调起
+    window.onload = () => {
+      setTimeout(() => {
+        window.location.href = mailtoLink;
+        // 3秒后改变标题，提示用户手动点击
+        setTimeout(() => {
+          statusText.textContent = "Contact Customer Service";
+          statusText.classList.remove("loading-dots");
+        }, 3000);
+      }, 800);
+    };
 
-    const mailtoLink =
-      `mailto:${toEmail}?subject=${encodeMailto(subject)}&body=${encodeMailto(body)}`;
-
-    // 设置按钮链接
-    document.getElementById("emailBtn").href = mailtoLink;
-
-    // 显示邮箱
-    document.getElementById("emailText").textContent = toEmail;
-
-    // 复制邮箱
-    document.getElementById("copyBtn").addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(toEmail);
-        const btn = document.getElementById("copyBtn");
-        const old = btn.textContent;
-        btn.textContent = "Copied ✓";
-        setTimeout(()=>btn.textContent=old, 1500);
-      }catch(e){
-        alert("Copy failed. Please copy manually: " + toEmail);
+    // 复制功能
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(config.to);
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = "Copied ✓";
+        copyBtn.style.color = "#059669";
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+          copyBtn.style.color = "";
+        }, 2000);
+      } catch (err) {
+        alert("Email: " + config.to);
       }
     });
-
-    // 可选：页面打开后自动弹出邮件（某些浏览器会拦截）
-    // 建议保留按钮点击方式更稳定
-    // window.location.href = mailtoLink;
   </script>
 </body>
 </html>
